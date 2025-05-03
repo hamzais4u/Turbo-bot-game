@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turbo Bot Game</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #0088cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #005f7f;
+    }
+    .score {
+      font-size: 24px;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Turbo Bot Game</h1>
+  <p>Click the button below to generate your score!</p>
+  <div class="score" id="score">Score: 0</div>
+  <button onclick="playGame()">Generate Score</button>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand(); // Optional: Make the web app full-screen
+
+    function playGame() {
+      // Generate a random score
+      const score = Math.floor(Math.random() * 100);
+
+      // Update the displayed score
+      document.getElementById('score').innerText = "Score: " + score;
+
+      // Send the score back to the Telegram bot
+      tg.sendData(JSON.stringify({ score: score }));
+    }
+  </script>
+</body>
+</html>
